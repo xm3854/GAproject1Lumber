@@ -2,11 +2,13 @@ const cells = Array.from(document.querySelectorAll(".cell"));
 const enemyCells = cells.slice(0, 22);
 const playerCells = cells.slice(20, 22);
 const scoreDisplay = document.querySelector(".score");
-
-let score;
+const countDown = document.querySelector(".countdown");
+let time = 30;
+let score = 0;
 
 function reset() {
   score = 0;
+  time = 30;
   scoreDisplay.innerHTML = "0";
 
   cells.forEach(function eraseCell(cell) {
@@ -42,9 +44,9 @@ function playerMove(e) {
         player
       );
     }
-    checkGame();
     score++;
     scoreDisplay.innerHTML = score;
+    checkGame();
   }
 }
 
@@ -86,12 +88,27 @@ function checkGame() {
     if (playerCells[i].children.length > 1) {
       stopGame = true;
       if (stopGame) {
-        alert(`Gameover, your score is ${score}`);
+        alert(`Gameover, your score is ${score - 1}`);
         reset();
       }
     }
   }
 }
 
-reset();
+function updateTimer() {
+  countDown.innerHTML = `${time}s`;
+  time--;
+  if (time === 0) {
+    alert(`Gameover, your score is ${score}`);
+    reset();
+  }
+}
+
+function startGame(e) {
+  if (e.key == "space" || e.keyCode == 32) {
+    reset();
+    setInterval(updateTimer, 1000);
+  }
+}
 document.addEventListener("keydown", playerMove);
+document.addEventListener("keydown", startGame);
