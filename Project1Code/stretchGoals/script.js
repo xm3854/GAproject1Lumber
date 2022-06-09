@@ -3,13 +3,17 @@ const enemyCells = cells.slice(0, 22);
 const playerCells = cells.slice(20, 22);
 const scoreDisplay = document.querySelector(".score");
 const countDown = document.querySelector(".countdown");
+const elem = document.getElementById("myBar");
 let time = 30;
 let score = 0;
+let width = 50;
 
 function reset() {
   score = 0;
   time = 30;
+  width = 50;
   scoreDisplay.innerHTML = "0";
+  elem.style.width = width + "%";
 
   cells.forEach(function eraseCell(cell) {
     return (cell.innerHTML = "");
@@ -108,11 +112,36 @@ function startGame(e) {
   if (e.key == "space" || e.keyCode == 32) {
     reset();
     setInterval(updateTimer, 1000);
+    setInterval(dropWidth, 400);
   }
 }
+
+function dropWidth() {
+  width--;
+  elem.style.width = width + "%";
+  if (width < 50) {
+    elem.style.backgroundColor = "red";
+  } else {
+    elem.style.backgroundColor = "green";
+  }
+  if (width <= 0) {
+    alert(`Gameover, your score is ${score}`);
+    reset();
+  }
+}
+
+function moveProgressBar(e) {
+  if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+    if (width >= 100) {
+      width = 100;
+      elem.style.width = width + "%";
+    } else {
+      width++;
+      elem.style.width = width + "%";
+    }
+  }
+}
+
 document.addEventListener("keydown", playerMove);
 document.addEventListener("keydown", startGame);
-
-if (score++) {
-  console.log(score);
-}
+document.addEventListener("keydown", moveProgressBar);
