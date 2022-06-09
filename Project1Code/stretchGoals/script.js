@@ -114,7 +114,7 @@ function startGame(e) {
   if (e.key == "space" || e.keyCode == 32) {
     reset();
     setInterval(updateTimer, 1000);
-    setInterval(dropWidth, 350);
+    setInterval(dropWidth, 200);
   }
 }
 
