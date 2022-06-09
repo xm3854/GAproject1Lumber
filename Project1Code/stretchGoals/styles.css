@@ -27,17 +27,14 @@ p,
   background-color: brown;
 }
 
-.enemy {
-  background: #f31414;
+.enemy img {
   width: 100%;
   height: 100%;
 }
 
-.player {
-  background: #14c6f3;
+.player img {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
 }
 
 #myProgress {

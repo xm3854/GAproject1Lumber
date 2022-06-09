@@ -57,13 +57,15 @@ function playerMove(e) {
 function spawnEnemy() {
   if (score % 2 !== 0) {
     const position = Math.floor(Math.random() * 2);
-    enemyCells[position].innerHTML = "<div class='enemy'></div>";
+    enemyCells[position].innerHTML =
+      "<div class='enemy'><img src='tree.png'/></div>";
   }
 }
 
 function spawnPlayer() {
   const position = Math.floor(Math.random() * 2);
-  playerCells[position].innerHTML = "<div class='player'></div>";
+  playerCells[position].innerHTML =
+    "<div class='player'><img src='lumberjack.png'/></div>";
 }
 
 function moveEnemy() {
@@ -112,7 +114,7 @@ function startGame(e) {
   if (e.key == "space" || e.keyCode == 32) {
     reset();
     setInterval(updateTimer, 1000);
-    setInterval(dropWidth, 300);
+    setInterval(dropWidth, 350);
   }
 }
 
